@@ -1271,7 +1271,7 @@ Quedo a la espera de confirmación. ¡Gracias!`;
   function getTapeHeightPx() {
     // px height of the tape strip in the mockup
     // Scale: 24mm -> 72px, 48mm -> 144px  (3px per mm)
-    return st.ancho === 48 ? 180 : 90;
+    return st.ancho === 48 ? 250 : 125;
   }
 
   function applyTapeHeight() {
@@ -1283,7 +1283,7 @@ Quedo a la espera de confirmación. ¡Gracias!`;
   }
 
   // REPEATS: max 3 (simulates the 21cm polimero with 2-3 designs)
-  const MAX_REPEATS = 2;
+  const MAX_REPEATS = 3;
 
   function renderPdfToCanvas(page) {
     applyTapeHeight();
