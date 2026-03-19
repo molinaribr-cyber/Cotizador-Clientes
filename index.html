@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cotizador de Cintas Impresas | Tu Marca</title>
+<meta name="description" content="Cotizá tu pedido de cintas impresas personalizadas al instante. Elegí medidas, colores y cantidad, y recibí tu precio en segundos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --brand: #1A1A2E;
+    --accent: #E8C547;
+    --bg: #F5F3EE;
+    --surface: #FFFFFF;
+    --border: #E0DDD6;
+    --text: #1A1A2E;
+    --muted: #7A7870;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  header {
+    background: var(--brand);
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--accent);
+    letter-spacing: 2px;
+  }
+
+  .logo span {
+    color: #fff;
+    font-size: 0.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 3px;
+    display: block;
+    text-transform: uppercase;
+    margin-top: -6px;
+  }
+
+  .hero {
+    background: var(--brand);
+    padding: 2.5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: var(--accent);
+    opacity: 0.05;
+    border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 8vw, 5rem);
+    color: #fff;
+    line-height: 0.95;
+    letter-spacing: 1px;
+    position: relative;
+  }
+
+  .hero h1 em { color: var(--accent); font-style: normal; }
+
+  .hero p {
+    color: rgba(255,255,255,0.5);
+    font-size: 1rem;
+    margin-top: 0.8rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    position: relative;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: -2rem auto 0;
+    padding: 0 1.5rem 4rem;
+    position: relative;
+  }
+
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    margin-bottom: 1.25rem;
+    animation: fadeUp 0.35s ease both;
+  }
+
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.10s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.20s; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    letter-spacing: 1.5px;
+    color: var(--brand);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .step-num {
+    width: 28px; height: 28px;
+    background: var(--accent);
+    color: var(--brand);
+    border-radius: 50%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: 6px; }
+
+  .field label {
+    font-size: 12px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 1px;
+    color: var(--muted);
+  }
+
+  .field select {
+    padding: 12px 36px 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; color: var(--text);
+    background: var(--bg);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A7870' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    appearance: none; -webkit-appearance: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .field select:focus { outline: none; border-color: var(--accent); background-color: #fff; }
+  .field select:disabled { opacity: 0.45; cursor: not-allowed; }
+
+  .option-grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .option-btn {
+    padding: 13px 10px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .option-btn small {
+    display: block;
+    font-size: 11px; font-weight: 400;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+
+  .option-btn:hover:not(:disabled) { border-color: var(--accent); background: #fdf9ec; }
+
+  .option-btn.selected {
+    border-color: var(--brand);
+    background: var(--brand);
+    color: #fff;
+  }
+
+  .option-btn.selected small { color: rgba(255,255,255,0.5); }
+
+  .option-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .field.full { grid-column: 1 / -1; }
+
+  .field input[type="text"] {
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px; color: var(--text);
+    background: var(--bg);
+    transition: border-color 0.2s;
+  }
+
+  .field input[type="text"]:focus { outline: none; border-color: var(--accent); background: #fff; }
+  .field input::placeholder { color: var(--muted); }
+
+  .result-card {
+    background: var(--brand);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.35s ease 0.25s both;
+  }
+
+  .result-card::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    background: var(--accent);
+    opacity: 0.07;
+    border-radius: 50%;
+  }
+
+  .empty-state { text-align: center; padding: 2rem 1rem; }
+
+  .empty-icon {
+    width: 56px; height: 56px;
+    background: rgba(232,197,71,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+  }
+
+  .empty-state p { font-size: 14px; color: rgba(255,255,255,0.35); }
+
+  .result-label {
+    font-size: 11px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 2px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 0.4rem;
+  }
+
+  .result-price {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    color: var(--accent);
+    line-height: 1; letter-spacing: 1px;
+  }
+
+  .result-price sub {
+    font-size: 1.4rem;
+    vertical-align: super;
+    margin-right: 4px;
+    opacity: 0.7;
+  }
+
+  .result-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 6px;
+  }
+
+  .result-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin: 1.25rem 0;
+  }
+
+  .breakdown {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+  }
+
+  @media (max-width: 500px) { .breakdown { grid-template-columns: 1fr; } }
+
+  .breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    padding: 3px 0;
+  }
+
+  .breakdown-item span:last-child {
+    color: rgba(255,255,255,0.75);
+    font-weight: 500;
+  }
+
+  .btn-whatsapp {
+    width: 100%;
+    padding: 18px 2rem;
+    background: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 600;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px;
+    transition: transform 0.15s, background 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-whatsapp:hover { background: #1ebd5a; transform: translateY(-1px); }
+  .btn-whatsapp:active { transform: scale(0.98); }
+  .btn-whatsapp:disabled { background: #b8b5b0; cursor: not-allowed; transform: none; }
+  .btn-whatsapp svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
+
+  .note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 0.75rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  /* ===== PREVIEW SECTION ===== */
+  .preview-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 2rem;
+    margin-bottom: 1.25rem;
+    animation: fadeUp 0.35s ease 0.12s both;
+  }
+
+  .preview-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .preview-tab {
+    flex: 1;
+    padding: 9px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.18s;
+    text-align: center;
+  }
+
+  .preview-tab:hover { border-color: var(--accent); color: var(--text); }
+  .preview-tab.active {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: #fff;
+  }
+
+  /* --- Tape Viewer --- */
+  .tape-viewer {
+    background: #f0ede8;
+    border-radius: 10px;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    min-height: 200px;
+    justify-content: center;
+  }
+
+  .tape-stage {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .tape-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(.34,1.56,.64,1);
+  }
+
+  .tape-body {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+    transition: all 0.4s cubic-bezier(.34,1.56,.64,1);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.4);
+  }
+
+  .tape-body.transpa {
+    background: linear-gradient(180deg,
+      rgba(220,230,240,0.45) 0%,
+      rgba(200,215,230,0.3) 50%,
+      rgba(220,230,240,0.45) 100%
+    );
+    border: 1px solid rgba(180,200,220,0.5);
+  }
+
+  .tape-body.blanco {
+    background: linear-gradient(180deg, #f8f8f6 0%, #eeecea 50%, #f8f8f6 100%);
+    border: 1px solid #ddd;
+  }
+
+  .tape-edge {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 6px;
+    background: rgba(0,0,0,0.06);
+  }
+  .tape-edge.left { left: 0; border-radius: 2px 0 0 2px; }
+  .tape-edge.right { right: 0; border-radius: 0 2px 2px 0; }
+
+  .tape-print-line {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    right: 10%;
+    transform: translateY(-50%);
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 3px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    pointer-events: none;
+    transition: all 0.3s;
+  }
+
+  .tape-print-line.transpa { color: rgba(30,30,80,0.7); }
+  .tape-print-line.blanco  { color: rgba(30,30,80,0.8); }
+
+  .tape-ruler {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  .tape-ruler-line {
+    height: 1.5px;
+    background: var(--muted);
+    flex: 1;
+    max-width: 60px;
+  }
+
+  .tape-hint {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  /* Width comparison */
+  .width-comparison {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 1rem;
+    background: #f0ede8;
+    border-radius: 10px;
+  }
+
+  .width-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .width-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    width: 48px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .width-bar-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .width-bar {
+    border-radius: 3px;
+    transition: all 0.4s cubic-bezier(.34,1.56,.64,1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .width-bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.25) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .width-bar.w24 {
+    height: 24px;
+    background: linear-gradient(90deg, #c8d4e0, #dde7f0, #c8d4e0);
+    border: 1px solid #b0c0d0;
+    max-width: 100%;
+  }
+
+  .width-bar.w48 {
+    height: 48px;
+    background: linear-gradient(90deg, #c8d4e0, #dde7f0, #c8d4e0);
+    border: 1px solid #b0c0d0;
+    max-width: 100%;
+  }
+
+  .width-bar.active.w24, .width-bar.active.w48 {
+    background: linear-gradient(90deg, var(--brand), #2a2a4e, var(--brand));
+    border-color: var(--brand);
+  }
+
+  .width-bar-sub {
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* --- PDF Upload --- */
+  .upload-zone {
+    border: 2px dashed var(--border);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: var(--bg);
+    position: relative;
+  }
+
+  .upload-zone:hover, .upload-zone.drag-over {
+    border-color: var(--accent);
+    background: #fdf9ec;
+  }
+
+  .upload-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .upload-icon {
+    width: 48px; height: 48px;
+    background: rgba(232,197,71,0.12);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+  }
+
+  .upload-zone h4 {
+    font-size: 15px; font-weight: 600;
+    color: var(--text); margin-bottom: 4px;
+  }
+
+  .upload-zone p {
+    font-size: 13px; color: var(--muted);
+  }
+
+  .pdf-preview-wrap {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .pdf-preview-wrap.visible { display: flex; }
+
+  .tape-mockup-container {
+    background: #e8e4de;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .tape-mockup-label {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+  }
+
+  /* Scene: tape strip + curled ends */
+  .tape-strip-scene {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  /* The curled end tabs */
+  .tape-curl {
+    width: 18px;
+    flex-shrink: 0;
+    background: rgba(0,0,0,0.07);
+    border-radius: 3px;
+    position: relative;
+    z-index: 3;
+    transition: height 0.4s cubic-bezier(.34,1.56,.64,1);
+  }
+  .tape-curl.left {
+    border-radius: 4px 0 0 4px;
+    box-shadow: -2px 0 6px rgba(0,0,0,0.12);
+    background: linear-gradient(90deg, #ccc9c3, #d8d5ce);
+  }
+  .tape-curl.right {
+    border-radius: 0 4px 4px 0;
+    box-shadow: 2px 0 6px rgba(0,0,0,0.12);
+    background: linear-gradient(90deg, #d8d5ce, #ccc9c3);
+  }
+
+  /* The actual tape outer wrapper */
+  .tape-strip-outer {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    transition: height 0.4s cubic-bezier(.34,1.56,.64,1);
+    box-shadow:
+      0 2px 0 rgba(0,0,0,0.06),
+      0 -2px 0 rgba(255,255,255,0.5),
+      0 6px 18px rgba(0,0,0,0.15);
+  }
+
+  .tape-strip-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .tape-strip-bg.transpa {
+    background: linear-gradient(180deg,
+      rgba(240,248,255,0.55) 0%,
+      rgba(220,235,248,0.35) 40%,
+      rgba(230,242,255,0.4) 100%
+    );
+  }
+
+  .tape-strip-bg.blanco {
+    background: linear-gradient(180deg, #fafaf8 0%, #f0ede8 50%, #fafaf8 100%);
+  }
+
+  /* The canvas IS the tape content — tiled design */
+  .tape-strip-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    mix-blend-mode: multiply;
+  }
+
+  .tape-edge-left, .tape-edge-right {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 6px;
+    z-index: 4;
+    pointer-events: none;
+  }
+  .tape-edge-left {
+    left: 0;
+    background: linear-gradient(90deg, rgba(0,0,0,0.08), transparent);
+  }
+  .tape-edge-right {
+    right: 0;
+    background: linear-gradient(270deg, rgba(0,0,0,0.08), transparent);
+  }
+
+  .pdf-reset-btn {
+    padding: 8px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    align-self: center;
+  }
+
+  .pdf-reset-btn:hover { border-color: var(--text); color: var(--text); }
+
+  .pdf-hint {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    TU MARCA
+    <span>cintas impresas personalizadas</span>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>COTIZÁ TU<br><em>PEDIDO</em> AHORA</h1>
+  <p>Elegí las opciones y obtené tu precio al instante</p>
+</div>
+
+<div class="container">
+
+  <!-- PASO 1: MEDIDAS -->
+  <div class="card">
+    <div class="card-title"><div class="step-num">1</div> MEDIDAS</div>
+    <div class="form-grid">
+      <div class="field">
+        <label>Ancho</label>
+        <select id="sel-ancho" onchange="onAnchoChange()">
+          <option value="24">24 mm</option>
+          <option value="48">48 mm</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Largo</label>
+        <select id="sel-largo" onchange="onLargoChange()">
+          <option value="50">50 m</option>
+          <option value="100">100 m</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREVIEW VISUAL -->
+  <div class="preview-card" id="preview-card">
+    <div class="card-title" style="margin-bottom:1rem;">
+      <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7V5a2 2 0 012-2h6a2 2 0 012 2v2"/></svg>
+      PREVIEW
+    </div>
+
+    <div class="preview-tabs">
+      <button class="preview-tab active" onclick="switchTab('visual')">📐 Ver cinta</button>
+      <button class="preview-tab" onclick="switchTab('compare')">↔ Comparar anchos</button>
+      <button class="preview-tab" onclick="switchTab('upload')">🖼 Subir diseño</button>
+    </div>
+
+    <!-- TAB: VISUAL TAPE -->
+    <div id="tab-visual">
+      <div class="tape-viewer">
+        <div class="tape-stage">
+          <div class="tape-wrap">
+            <div class="tape-body transpa" id="tape-body">
+              <div class="tape-edge left"></div>
+              <div class="tape-print-line transpa" id="tape-text">TU MARCA · TU MARCA · TU MARCA · TU MARCA</div>
+              <div class="tape-edge right"></div>
+            </div>
+          </div>
+        </div>
+        <div class="tape-ruler">
+          <div class="tape-ruler-line"></div>
+          <span id="tape-ruler-label">24 mm de ancho</span>
+          <div class="tape-ruler-line"></div>
+        </div>
+        <p class="tape-hint">Así se ve la cinta con las medidas seleccionadas.<br>El texto muestra escala real del ancho.</p>
+      </div>
+    </div>
+
+    <!-- TAB: COMPARE WIDTHS -->
+    <div id="tab-compare" style="display:none">
+      <div class="width-comparison">
+        <div class="width-row">
+          <div class="width-label">24 mm</div>
+          <div class="width-bar-wrap">
+            <div class="width-bar w24" id="bar24"></div>
+            <div class="width-bar-sub">Standard — ideal para cajas pequeñas y medianas</div>
+          </div>
+        </div>
+        <div class="width-row">
+          <div class="width-label">48 mm</div>
+          <div class="width-bar-wrap">
+            <div class="width-bar w48" id="bar48"></div>
+            <div class="width-bar-sub">Doble ancho — mayor visibilidad de tu marca</div>
+          </div>
+        </div>
+        <p class="tape-hint" style="margin-top:0.5rem;">Las barras están en proporción real entre sí.</p>
+      </div>
+    </div>
+
+    <!-- TAB: PDF UPLOAD -->
+    <div id="tab-upload" style="display:none">
+      <div class="upload-zone" id="upload-zone">
+        <input type="file" accept=".pdf,image/*" id="file-input" onchange="handleFileUpload(event)">
+        <div class="upload-icon">
+          <svg width="22" height="22" fill="none" stroke="rgba(232,197,71,0.9)" stroke-width="1.6" viewBox="0 0 24 24">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+          </svg>
+        </div>
+        <h4>Subí tu diseño</h4>
+        <p>PDF, PNG o JPG · Se mostrará como quedaría en la cinta</p>
+      </div>
+
+      <div class="pdf-preview-wrap" id="pdf-preview">
+        <div class="tape-mockup-container">
+          <div class="tape-mockup-label" id="mockup-label">Cinta 24mm — Vista previa</div>
+
+          <!-- The tape strip: design repeating across it -->
+          <div class="tape-strip-scene" id="tape-strip-scene">
+            <!-- left curl shadow -->
+            <div class="tape-curl left"></div>
+            <!-- main tape body -->
+            <div class="tape-strip-outer" id="tape-strip-outer">
+              <div class="tape-strip-bg transpa" id="tape-strip-bg"></div>
+              <!-- canvas fills this, tiled via JS -->
+              <canvas id="pdf-canvas" class="tape-strip-canvas"></canvas>
+              <div class="tape-edge-left"></div>
+              <div class="tape-edge-right"></div>
+            </div>
+            <!-- right curl shadow -->
+            <div class="tape-curl right"></div>
+          </div>
+
+          <p class="pdf-hint">El diseño se repite a lo largo de la cinta — así es como se ve al desenrollarla</p>
+        </div>
+        <button class="pdf-reset-btn" onclick="resetUpload()">✕ Cambiar archivo</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PASO 2: COLOR -->
+  <div class="card">
+    <div class="card-title"><div class="step-num">2</div> TIPO DE CINTA</div>
+    <div class="option-grid" id="color-grid" style="grid-template-columns: 1fr 1fr;"></div>
+  </div>
+
+  <!-- PASO 3: CANTIDAD -->
+  <div class="card">
+    <div class="card-title"><div class="step-num">3</div> CANTIDAD DE ROLLOS</div>
+    <div class="option-grid" id="qty-grid" style="grid-template-columns: repeat(3, 1fr);"></div>
+  </div>
+
+  <!-- PASO 4: TUS DATOS -->
+  <div class="card">
+    <div class="card-title"><div class="step-num">4</div> TUS DATOS</div>
+    <div class="form-grid">
+      <div class="field full">
+        <label>Nombre o empresa</label>
+        <input type="text" id="nombre-cliente" placeholder="Ej: Confecciones García">
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTADO -->
+  <div class="result-card">
+    <div class="empty-state" id="empty-state">
+      <div class="empty-icon">
+        <svg width="24" height="24" fill="none" stroke="rgba(232,197,71,0.8)" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M9 7H6a2 2 0 00-2 2v9a2 2 0 002 2h9a2 2 0 002-2v-3M13 3h8m0 0v8m0-8L11 13"/>
+        </svg>
+      </div>
+      <p>Completá los campos para ver el precio de tu pedido</p>
+    </div>
+
+    <div id="result-show" style="display:none">
+      <div class="result-label">Precio total del pedido</div>
+      <div class="result-price"><sub>$</sub><span id="price-ars">—</span></div>
+      <div class="result-sub" id="result-sub">precio final en pesos · incluye todo</div>
+      <hr class="result-divider">
+      <div class="breakdown" id="breakdown"></div>
+    </div>
+  </div>
+
+  <button class="btn-whatsapp" id="btn-wa" disabled onclick="enviarWA()">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+    Solicitar cotización por WhatsApp
+  </button>
+  <p class="note">Te vamos a responder en menos de 24 horas hábiles</p>
+
+</div>
+
+<footer>
+  &copy; 2025 Tu Marca · Cintas Impresas Personalizadas · Todos los derechos reservados
+</footer>
+
+<script>
+  // ============================================================
+  // CONFIG
+  // ============================================================
+  const WHATSAPP_NUMBER       = "5491130551315"; // TODO: reemplazá con tu número real
+  const MARGEN                = 0.6;
+  const DOLAR_FALLBACK        = 1480;
+  const COSTO_POLIMERO_USD    = 18;
+  const COSTO_DISENO_USD      = 0;
+  const RECARGO_2COLORES_PCT  = 0.10;
+  const MIN_CAJAS_2COLORES    = 5;
+
+  // ============================================================
+  // TABLA DE PRECIOS FÁBRICA — del repositorio original
+  // ============================================================
+  const PRECIOS_FABRICA = [
+    {
+      ancho: 24, largo: 50,
+      TRANSPA: { 36: 27,  72: 49,  108: Math.round(0.49 * 108) },
+      BLANCO:  { 36: 39,  72: 28,  108: Math.round(0.87 * 72)  }
+    },
+    {
+      ancho: 24, largo: 100,
+      TRANSPA: { 36: 43,  72: 78,  108: Math.round(0.78 * 108) },
+      BLANCO:  { 36: 62,  72: 45,  108: Math.round(1.39 * 72)  }
+    },
+    {
+      ancho: 48, largo: 50,
+      TRANSPA: { 36: 44,  72: 77,  108: Math.round(0.79 * 108) },
+      BLANCO:  { 36: 68,  72: 44,  108: Math.round(1.26 * 72)  }
+    },
+    {
+      ancho: 48, largo: 100,
+      TRANSPA: { 36: 70,  72: 123, 108: Math.round(1.26 * 108) },
+      BLANCO:  { 36: 109, 72: 70,  108: Math.round(2.01 * 72)  }
+    },
+  ];
+
+  // ============================================================
+  // ESTADO
+  // ============================================================
+  const st = { ancho: 24, largo: 50, color: null, rollos: null };
+  let dolarRate = DOLAR_FALLBACK;
+
+  // ============================================================
+  // DÓLAR BLUE
+  // ============================================================
+  async function fetchDolar() {
+    try {
+      const res  = await fetch("https://dolarapi.com/v1/dolares/blue");
+      const data = await res.json();
+      if (data && data.venta) dolarRate = data.venta;
+    } catch { /* usa fallback silenciosamente */ }
+    calcular();
+  }
+
+  // ============================================================
+  // HELPERS
+  // ============================================================
+  function getFila() {
+    return PRECIOS_FABRICA.find(r => r.ancho === st.ancho && r.largo === st.largo) || null;
+  }
+
+  function getPrecioFabrica(color, rollos) {
+    const fila = getFila();
+    if (!fila || !color || !fila[color]) return null;
+    const p = fila[color][rollos];
+    return (p === null || p === undefined) ? null : p;
+  }
+
+  function formatARS(n) {
+    return Math.round(n).toLocaleString("es-AR", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  }
+
+  // ============================================================
+  // RENDERS
+  // ============================================================
+  function renderColores() {
+    const fila   = getFila();
+    const cols   = fila ? Object.keys(fila).filter(k => k !== "ancho" && k !== "largo") : [];
+    const labels = { TRANSPA: "Cinta Transparente", BLANCO: "Cinta Blanca" };
+
+    document.getElementById("color-grid").innerHTML = cols.map(c => `
+      <button class="option-btn${st.color === c ? " selected" : ""}" onclick="setColor('${c}')">
+        ${labels[c] || c}
+      </button>
+    `).join("");
+
+    if (st.color && !cols.includes(st.color)) st.color = null;
+  }
+
+  function renderCantidades() {
+    const CANTIDADES = [
+      { rollos: 36,  label: "36 rollos",  sub: "1 caja"   },
+      { rollos: 72,  label: "72 rollos",  sub: "2 cajas"  },
+      { rollos: 108, label: "108 rollos", sub: "3 cajas"  },
+    ];
+
+    document.getElementById("qty-grid").innerHTML = CANTIDADES.map(q => {
+      const ok = st.color && getPrecioFabrica(st.color, q.rollos) !== null;
+      return `
+        <button class="option-btn${st.rollos === q.rollos ? " selected" : ""}"
+          ${!ok ? "disabled" : ""}
+          onclick="setRollos(${q.rollos})">
+          ${q.label}
+          <small>${q.sub}</small>
+        </button>
+      `;
+    }).join("");
+
+    if (st.rollos && getPrecioFabrica(st.color, st.rollos) === null) st.rollos = null;
+  }
+
+  // ============================================================
+  // EVENTOS
+  // ============================================================
+  function onAnchoChange() {
+    st.ancho = parseInt(document.getElementById("sel-ancho").value);
+    const selLargo = document.getElementById("sel-largo");
+    if (st.ancho === 24) {
+      selLargo.value    = "50";
+      selLargo.disabled = true;
+      st.largo          = 50;
+    } else {
+      selLargo.disabled = false;
+      st.largo = parseInt(selLargo.value);
+    }
+    st.color  = null; st.rollos = null;
+    renderColores(); renderCantidades(); calcular(); updatePreview();
+  }
+
+  function onLargoChange() {
+    st.largo  = parseInt(document.getElementById("sel-largo").value);
+    st.color  = null; st.rollos = null;
+    renderColores(); renderCantidades(); calcular();
+  }
+
+  function setColor(c) {
+    st.color  = c; st.rollos = null;
+    renderColores(); renderCantidades(); calcular(); updatePreview();
+  }
+
+  function setRollos(r) {
+    st.rollos = r;
+    renderCantidades(); calcular();
+  }
+
+  // ============================================================
+  // CÁLCULO
+  // ============================================================
+  function calcular() {
+    if (!st.color || !st.rollos) { mostrarVacio(); return; }
+
+    const precioFab = getPrecioFabrica(st.color, st.rollos);
+    if (precioFab === null) { mostrarVacio(); return; }
+
+    // Extras internos — cliente NUNCA los ve
+    const cajas     = st.rollos / 36;
+    const recargo2C = cajas >= MIN_CAJAS_2COLORES
+      ? Math.round(precioFab * RECARGO_2COLORES_PCT) : 0;
+
+    // Margen aplicado SOLO al costo de fábrica (+ recargo 2 colores si aplica)
+    // Diseño y polímero se suman POR ENCIMA del precio ya con margen
+    const costoFabrica     = precioFab + recargo2C;
+    const precioFabConMargen = costoFabrica / (1 - MARGEN);
+    const precioClienteUSD   = precioFabConMargen + COSTO_POLIMERO_USD + COSTO_DISENO_USD;
+    const precioClienteARS   = precioClienteUSD * dolarRate;
+    const xRolloARS          = precioClienteARS / st.rollos;
+
+    document.getElementById("price-ars").textContent = formatARS(precioClienteARS);
+    document.getElementById("result-sub").textContent =
+      `$${formatARS(xRolloARS)} por rollo · precio final en pesos`;
+
+    const colorLabel = { TRANSPA: "Cinta Transparente", BLANCO: "Cinta Blanca" }[st.color] || st.color;
+    document.getElementById("breakdown").innerHTML = `
+      <div class="breakdown-item">
+        <span>Cinta</span>
+        <span>${st.ancho}mm × ${st.largo}m ${colorLabel}</span>
+      </div>
+      <div class="breakdown-item">
+        <span>Cantidad</span>
+        <span>${st.rollos} rollos · ${cajas} caja${cajas > 1 ? "s" : ""}</span>
+      </div>
+    `;
+
+    window._cotizacion = {
+      precioClienteARS: Math.round(precioClienteARS),
+      xRolloARS:        Math.round(xRolloARS),
+      colorLabel,
+    };
+
+    document.getElementById("empty-state").style.display = "none";
+    document.getElementById("result-show").style.display = "block";
+    document.getElementById("btn-wa").disabled = false;
+  }
+
+  function mostrarVacio() {
+    document.getElementById("empty-state").style.display = "block";
+    document.getElementById("result-show").style.display = "none";
+    document.getElementById("btn-wa").disabled = true;
+    window._cotizacion = null;
+  }
+
+  // ============================================================
+  // WHATSAPP
+  // ============================================================
+  function enviarWA() {
+    if (!window._cotizacion) return;
+    const { precioClienteARS, xRolloARS, colorLabel } = window._cotizacion;
+    const nombre = document.getElementById("nombre-cliente").value.trim() || "Cliente";
+    const cajas  = st.rollos / 36;
+
+    const msg =
+`¡Hola! Les escribo para solicitar una cotización 😊
+
+*Datos del pedido:*
+• Nombre/Empresa: ${nombre}
+• Cinta: ${st.ancho}mm × ${st.largo}m ${colorLabel}
+• Cantidad: ${st.rollos} rollos (${cajas} caja${cajas > 1 ? "s" : ""})
+
+*Precio estimado según cotizador:*
+• Total: $${formatARS(precioClienteARS)}
+• Precio por rollo: $${formatARS(xRolloARS)}
+
+Quedo a la espera de confirmación. ¡Gracias!`;
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+  }
+
+  // ============================================================
+  // PREVIEW — Tape Visual
+  // ============================================================
+  function updatePreview() {
+    const ancho = st.ancho; // 24 or 48
+    const color = st.color; // "TRANSPA" | "BLANCO" | null
+
+    // Tape body sizing (px)
+    const tapeH = ancho === 48 ? 90 : 48;
+    const tapeW = 360;
+    const body  = document.getElementById("tape-body");
+    body.style.width  = tapeW + "px";
+    body.style.height = tapeH + "px";
+
+    const colorClass = (color === "BLANCO") ? "blanco" : "transpa";
+    body.className = "tape-body " + colorClass;
+
+    const txt = document.getElementById("tape-text");
+    txt.className = "tape-print-line " + colorClass;
+    txt.style.fontSize = (ancho === 48 ? 18 : 12) + "px";
+
+    document.getElementById("tape-ruler-label").textContent = ancho + " mm de ancho";
+
+    // Width comparison bars
+    const isActive24 = ancho === 24;
+    document.getElementById("bar24").className = "width-bar w24" + (isActive24 ? " active" : "");
+    document.getElementById("bar48").className = "width-bar w48" + (!isActive24 ? " active" : "");
+
+    // PDF mockup: update bg class & label
+    const stripBg    = document.getElementById("tape-strip-bg");
+    const mockLabel  = document.getElementById("mockup-label");
+    if (stripBg) stripBg.className = "tape-strip-bg " + colorClass;
+    if (mockLabel) mockLabel.textContent = `Cinta ${ancho}mm — Vista previa`;
+    applyTapeHeight();
+
+    // Re-render PDF canvas if loaded
+    if (window._pdfPage) renderPdfToCanvas(window._pdfPage);
+  }
+
+  // ============================================================
+  // PREVIEW — Tabs
+  // ============================================================
+  function switchTab(name) {
+    ["visual","compare","upload"].forEach(t => {
+      document.getElementById("tab-"+t).style.display = t === name ? "block" : "none";
+    });
+    document.querySelectorAll(".preview-tab").forEach((btn, i) => {
+      btn.classList.toggle("active", ["visual","compare","upload"][i] === name);
+    });
+  }
+
+  // ============================================================
+  // PREVIEW — PDF / Image Upload
+  // ============================================================
+  let _pdfjsLib = null;
+
+  async function loadPdfJs() {
+    if (_pdfjsLib) return _pdfjsLib;
+    return new Promise((resolve, reject) => {
+      const s = document.createElement("script");
+      s.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+      s.onload = () => {
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+        _pdfjsLib = pdfjsLib;
+        resolve(pdfjsLib);
+      };
+      s.onerror = reject;
+      document.head.appendChild(s);
+    });
+  }
+
+  async function handleFileUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const zone    = document.getElementById("upload-zone");
+    const preview = document.getElementById("pdf-preview");
+    zone.style.display    = "none";
+    preview.classList.add("visible");
+
+    const canvas = document.getElementById("pdf-canvas");
+
+    if (file.type === "application/pdf") {
+      try {
+        const lib      = await loadPdfJs();
+        const arrBuf   = await file.arrayBuffer();
+        const pdfDoc   = await lib.getDocument({ data: arrBuf }).promise;
+        const page     = await pdfDoc.getPage(1);
+        window._pdfPage = page;
+        renderPdfToCanvas(page);
+      } catch(e) {
+        canvas.style.display = "none";
+        const fallback = document.createElement("p");
+        fallback.textContent = "No se pudo cargar el PDF. Probá con una imagen (PNG/JPG).";
+        fallback.style.cssText = "font-size:13px;color:var(--muted);text-align:center;padding:1rem;";
+        document.getElementById("tape-strip-content").appendChild(fallback);
+      }
+    } else {
+      // It's an image
+      window._pdfPage = null;
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => renderImageToCanvas(img);
+      img.src    = url;
+    }
+  }
+
+  function getTapeHeightPx() {
+    // px height of the tape strip in the mockup
+    // Scale: 24mm -> 72px, 48mm -> 144px  (3px per mm)
+    return st.ancho === 48 ? 144 : 72;
+  }
+
+  function applyTapeHeight() {
+    const h = getTapeHeightPx();
+    const outer  = document.getElementById("tape-strip-outer");
+    const curls  = document.querySelectorAll(".tape-curl");
+    if (outer) outer.style.height = h + "px";
+    curls.forEach(c => c.style.height = h + "px");
+  }
+
+  function renderPdfToCanvas(page) {
+    applyTapeHeight();
+    const tapeH   = getTapeHeightPx();
+    const origVP  = page.getViewport({ scale: 1 });
+    // Scale design height to tape height
+    const scale   = tapeH / origVP.height;
+    const vp      = page.getViewport({ scale });
+    const designW = Math.round(vp.width);   // width of one repeat
+
+    // Get container width for tiling
+    const outer   = document.getElementById("tape-strip-outer");
+    const stripW  = outer ? outer.clientWidth : 520;
+    const repeats = Math.ceil(stripW / designW) + 1;
+    const totalW  = designW * repeats;
+
+    const canvas  = document.getElementById("pdf-canvas");
+    canvas.width  = totalW;
+    canvas.height = tapeH;
+    const ctx     = canvas.getContext("2d");
+    ctx.clearRect(0, 0, totalW, tapeH);
+
+    // Render PDF page once into an offscreen canvas, then tile it
+    const offscreen = document.createElement("canvas");
+    offscreen.width  = designW;
+    offscreen.height = tapeH;
+    const offCtx = offscreen.getContext("2d");
+
+    page.render({ canvasContext: offCtx, viewport: vp }).promise.then(() => {
+      for (let i = 0; i < repeats; i++) {
+        ctx.drawImage(offscreen, i * designW, 0);
+      }
+    });
+  }
+
+  function renderImageToCanvas(img) {
+    applyTapeHeight();
+    const tapeH   = getTapeHeightPx();
+    const ratio   = img.width / img.height;
+    const designW = Math.round(tapeH * ratio);
+
+    const outer   = document.getElementById("tape-strip-outer");
+    const stripW  = outer ? outer.clientWidth : 520;
+    const repeats = Math.ceil(stripW / designW) + 1;
+    const totalW  = designW * repeats;
+
+    const canvas  = document.getElementById("pdf-canvas");
+    canvas.width  = totalW;
+    canvas.height = tapeH;
+    const ctx     = canvas.getContext("2d");
+    ctx.clearRect(0, 0, totalW, tapeH);
+    for (let i = 0; i < repeats; i++) {
+      ctx.drawImage(img, i * designW, 0, designW, tapeH);
+    }
+  }
+
+  function resetUpload() {
+    window._pdfPage = null;
+    document.getElementById("file-input").value = "";
+    document.getElementById("upload-zone").style.display = "block";
+    document.getElementById("pdf-preview").classList.remove("visible");
+    // Clear canvas
+    const canvas = document.getElementById("pdf-canvas");
+    canvas.getContext("2d").clearRect(0,0,canvas.width,canvas.height);
+  }
+
+  // Drag-and-drop highlight
+  const uploadZone = document.getElementById("upload-zone");
+  uploadZone.addEventListener("dragover",  e => { e.preventDefault(); uploadZone.classList.add("drag-over"); });
+  uploadZone.addEventListener("dragleave", () => uploadZone.classList.remove("drag-over"));
+  uploadZone.addEventListener("drop", e => {
+    e.preventDefault();
+    uploadZone.classList.remove("drag-over");
+    const dt = e.dataTransfer;
+    if (dt.files.length) handleFileUpload({ target: { files: dt.files } });
+  });
+
+  // ============================================================
+  // INIT — run preview after existing init
+  // ============================================================
+  updatePreview();
+
+</script>
+</body>
+</html>
